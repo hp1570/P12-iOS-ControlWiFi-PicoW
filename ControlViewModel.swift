@@ -6,12 +6,14 @@
 //  principal, que es el único que puede modificar la interfaz.
 
 import Foundation
+import SwiftUI
+import Combine
 
 @MainActor
 final class ControlViewModel: ObservableObject {
 
     // La IP se guarda en UserDefaults para no tener que escribirla cada vez que se abre la app.
-    @Published var ip: String {
+    @Published var ip: String = UserDefaults.standard.string(forKey: "ipPicoW") ?? "" {
         didSet { UserDefaults.standard.set(ip, forKey: "ipPicoW") }
     }
     @Published var conectado = false
@@ -24,7 +26,7 @@ final class ControlViewModel: ObservableObject {
     private let api = PicoAPI()
 
     init() {
-        ip = UserDefaults.standard.string(forKey: "ipPicoW") ?? ""
+        self.ip = UserDefaults.standard.string(forKey: "ipPicoW") ?? ""
     }
 
     // MARK: - Acciones que llama la vista
