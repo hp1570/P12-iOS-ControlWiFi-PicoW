@@ -1,0 +1,20 @@
+<!-- P12 · Claves que necesita la app iOS para hablar HTTP (sin S) con la Pico W.
+     En Xcode 13+ no hay archivo Info.plist visible: agrégalas en
+     Target > Info > Custom iOS Target Properties (botón +):
+       1) "App Transport Security Settings" (Dictionary)
+            └ "Allows Local Networking" (Boolean) = YES
+       2) "Privacy - Local Network Usage Description" (String) = el texto de abajo
+     Si prefieres editar el XML (clic derecho en Info.plist > Open As > Source Code), pega esto
+     dentro del <dict> principal: -->
+
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsLocalNetworking</key>
+    <true/>
+</dict>
+<key>NSLocalNetworkUsageDescription</key>
+<string>La app se conecta a la Raspberry Pi Pico W en tu red WiFi para controlar el LED y el servomotor.</string>
+
+<!-- Solo si con lo anterior aparece el error "iOS bloqueó HTTP", cambia el diccionario por
+     <key>NSAllowsArbitraryLoads</key><true/>
+     (menos estricto; para una práctica en red local es aceptable). -->
