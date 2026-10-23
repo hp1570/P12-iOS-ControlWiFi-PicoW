@@ -2,3 +2,6 @@
 xcuserdata/
 DerivedData/
 *.xcuserstate
+
+# Credenciales Wi-Fi (usar config.example.py como plantilla)
+config.py
